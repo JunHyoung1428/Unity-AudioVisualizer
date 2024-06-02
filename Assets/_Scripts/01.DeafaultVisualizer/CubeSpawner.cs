@@ -8,14 +8,17 @@ public class CubeSpawner : MonoBehaviour
     private GameObject[] cubes;
 
     [Header("Settings")]
-    [SerializeField] float spawnRadius = 30f;
-    [SerializeField] float sizePower  =10f;
+    [SerializeField] float spawnRadius = 10f;
+    [Range(0f,100f)]
+    [SerializeField] float sizePower  =20f;
 
     [Space(2)]
     [Header("Scales")]
     [Range(0,2)]
     [SerializeField] float minYScale = 1.0f;
+    [Range(0,1)]
     [SerializeField] float xScale = 1f;
+    [Range(0, 1)]
     [SerializeField] float zScale = 1f;
     int SampleLength;
     bool spawned;
@@ -34,7 +37,8 @@ public class CubeSpawner : MonoBehaviour
 
         for(int i = 0; i < SampleLength; i++)
         {
-            cubes[i].transform.localScale = new Vector3(xScale, (AudioPeer.Instance.Samples[i] * sizePower) + minYScale, zScale);
+           cubes[i].transform.localScale = new Vector3(xScale, (AudioPeer.Instance.Samples[i] * sizePower) + minYScale, zScale);
+            //cubes[i].transform.localScale = new Vector3(xScale,  zScale, (AudioPeer.Instance.Samples[i] * sizePower) + minYScale);
         }
     }
 

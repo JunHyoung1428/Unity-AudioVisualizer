@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 4780147396440580490, guid: c0f2a9038b25fd64fb8a9f94d4eb00da, type: 3}
-  spawnRadius: 30
+  spawnRadius: 10
   sizePower: 10
   minYScale: 1
   xScale: 0.1
