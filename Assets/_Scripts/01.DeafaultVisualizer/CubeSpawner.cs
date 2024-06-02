@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace defaultVisualizer
+namespace deafaultVisualizer
 {
     public class CubeSpawner : MonoBehaviour
     {
