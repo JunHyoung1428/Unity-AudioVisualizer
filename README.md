@@ -31,10 +31,10 @@ In this Project 43 hertz per Sample
 ***
 - ### 03.AudioResponseUI
 ![VisualizerUI](https://github.com/JunHyoung1428/Unity-AudioVisualizer/assets/154119773/d2a4fa67-37b1-4a6e-b05c-1de2ef7d7eb9)
-
+😎
 
 <br/> <br/> 
-## Feature plans
+## 💡Feature plans
   - Add Buffer for Visualizer works lerp
   - Change Color or Light by SpectrumData
 
