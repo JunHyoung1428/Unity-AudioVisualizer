@@ -767,7 +767,7 @@ MonoBehaviour:
   rect: {fileID: 945228364}
   mode: 0
   SizePower: 1
-  smoothTime: 0.0295
+  smoothTime: 0.02
   MinXScale: 1
   MinYScale: 1
   xFrequence: 0

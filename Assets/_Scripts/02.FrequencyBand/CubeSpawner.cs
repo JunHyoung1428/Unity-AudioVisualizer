@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 
 namespace FrequencyBand
@@ -11,6 +12,13 @@ namespace FrequencyBand
         [SerializeField] private GameObject paramCube;
         private GameObject[] cubes;
         private GameObject[] paramCubes;
+
+        enum Mode {
+            Radius = 0,
+            Linear =1,
+        }
+
+        [SerializeField] Mode mode; 
 
         [Space(3)]
         [Header("[Radius Cubes Setting]")]
@@ -23,6 +31,7 @@ namespace FrequencyBand
         [SerializeField] float rXScale = 0.1f;
         [Range(0, 1)]
         [SerializeField] float rZScale = 0.1f;
+        [SerializeField] float increment = 1.0f;
 
         [Space(3)]
         [Header("[Param Cubes Setting]")]
@@ -45,7 +54,15 @@ namespace FrequencyBand
         {
             SampleLength = AudioPeer.Instance.Samples.Length;
             ParamLength = AudioPeer.Instance.FreqBand.Length;
-            SpawnCubeRadius();
+            switch (mode)
+            {
+                case Mode.Radius:
+                    SpawnCubeRadius();
+                    break;
+                case Mode.Linear:
+                    SpawnCubeLinear();
+                    break;  
+            }
             SpawnParamCubes();
         }
 
@@ -89,6 +106,24 @@ namespace FrequencyBand
                 float angle = i * 360f / SampleLength;
                 dir = Quaternion.Euler(0, angle, 0) * transform.forward;
                 pos = transform.position + dir * spawnRadius;
+
+                GameObject newCube = Instantiate(cube, pos, Quaternion.identity, newParent.transform);
+                cube.name = $"Cube {i}";
+                cubes[i] = newCube;
+            }
+            spawndRadius = true;
+        }
+
+
+        void SpawnCubeLinear()
+        {
+            cubes = new GameObject[SampleLength];
+            GameObject newParent = new GameObject(" Cubes");
+            newParent.transform.parent = transform;
+
+            for (int i = 0; i < SampleLength; i++)
+            {
+                Vector3 pos = transform.position + new Vector3(increment * i, 0f, 0f);
 
                 GameObject newCube = Instantiate(cube, pos, Quaternion.identity, newParent.transform);
                 cube.name = $"Cube {i}";
