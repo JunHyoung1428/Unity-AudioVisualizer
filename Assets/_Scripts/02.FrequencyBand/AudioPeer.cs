@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace deafaultVisualizer
+namespace FrequencyBand
 {
     public class AudioPeer : MonoBehaviour
     {
@@ -32,21 +32,26 @@ namespace deafaultVisualizer
             "\nRearLeft " +
             "\nRearRight")]
         private AudioChannel channel = AudioChannel.Left;
-        [Range(8, 12)] public int Pow = 8;
+        [Range(8, 12)] public int Pow = 9;
+        [SerializeField]  int FreqBandSize = 8;
+        int FreqBandPower = 1;
 
         [Space(3)]
         [Header("[OutPut]")]
-        public float[] Samples;
+        public float[] Samples; // 512 samples
+        public float[] FreqBand; 
 
         private void Awake()
         {
             CreateInstance();
             Samples = new float[(int)Mathf.Pow(2, Pow)];
+            FreqBand = new float[FreqBandSize];
         }
 
         private void Update()
         {
             GetSpectrum();
+            FrequencyBand();
         }
 
         void CreateInstance()
@@ -65,6 +70,31 @@ namespace deafaultVisualizer
         void GetSpectrum()
         {
             audioSource.GetSpectrumData(samples: Samples, channel: (int)channel, FFTWindow.Blackman);
+        }
+
+        void FrequencyBand()
+        {
+            int cnt = 0;
+
+            for(int i =0; i<8; i++)
+            {
+                float avg = 0;
+                int sampleCnt = (int)Mathf.Pow(2,i)*2;
+
+                if (i == 7)
+                {
+                    sampleCnt += 2;
+                }
+
+                for(int j = 0; j<sampleCnt; j++)
+                {
+                    avg += Samples[cnt];
+                    cnt++;
+                }
+
+                avg /= sampleCnt;
+                FreqBand[i] = avg*FreqBandPower;
+            }
         }
     }
 }
