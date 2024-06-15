@@ -32,26 +32,34 @@ namespace FrequencyBand
             "\nRearLeft " +
             "\nRearRight")]
         private AudioChannel channel = AudioChannel.Left;
-        [Range(8, 12)] public int Pow = 9;
-        [SerializeField]  int FreqBandSize = 8;
+        [Range(8, 12)] public int pow = 9;
+        [SerializeField]  int freqBandSize = 8;
         int FreqBandPower = 1;
+        [SerializeField] const float DecreaseRate = 0.005f;
+        [SerializeField] const float IncreaseRate = 1.2f;
 
         [Space(3)]
         [Header("[OutPut]")]
-        public float[] Samples; // 512 samples
-        public float[] FreqBand; 
+        public float[] samples; // 512 samples
+        public float[] freqBand;
+        public float[] bandBuffer;
+        float[] bufferDecrease;
+
 
         private void Awake()
         {
             CreateInstance();
-            Samples = new float[(int)Mathf.Pow(2, Pow)];
-            FreqBand = new float[FreqBandSize];
+            samples = new float[(int)Mathf.Pow(2, pow)];
+            freqBand = new float[freqBandSize];
+            bandBuffer = new float[freqBandSize];
+            bufferDecrease = new float[freqBandSize];
         }
 
         private void Update()
         {
             GetSpectrum();
             FrequencyBand();
+            BandBuffer();
         }
 
         void CreateInstance()
@@ -69,7 +77,7 @@ namespace FrequencyBand
 
         void GetSpectrum()
         {
-            audioSource.GetSpectrumData(samples: Samples, channel: (int)channel, FFTWindow.Blackman);
+            audioSource.GetSpectrumData(samples: samples, channel: (int)channel, FFTWindow.Blackman);
         }
 
         void FrequencyBand()
@@ -88,13 +96,31 @@ namespace FrequencyBand
 
                 for(int j = 0; j<sampleCnt; j++)
                 {
-                    avg += Samples[cnt];
+                    avg += samples[cnt];
                     cnt++;
                 }
 
                 avg /= sampleCnt;
-                FreqBand[i] = avg*FreqBandPower;
+                freqBand[i] = avg*FreqBandPower;
             }
+        }
+
+        void BandBuffer()
+        {
+            for (int i = 0; i < freqBandSize; ++i){
+                if (freqBand[i] > bandBuffer[i])
+                {
+                    bandBuffer[i] = freqBand[i];
+                    bufferDecrease[i] = DecreaseRate;
+                }
+
+                if (freqBand[i] < bandBuffer[i])
+                {
+                    bandBuffer[i] -= bufferDecrease[i];
+                    bufferDecrease[i] *= IncreaseRate;
+                }
+            }
+
         }
     }
 }

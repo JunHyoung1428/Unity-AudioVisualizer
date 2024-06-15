@@ -52,8 +52,8 @@ namespace FrequencyBand
 
         private void Start()
         {
-            SampleLength = AudioPeer.Instance.Samples.Length;
-            ParamLength = AudioPeer.Instance.FreqBand.Length;
+            SampleLength = AudioPeer.Instance.samples.Length;
+            ParamLength = AudioPeer.Instance.freqBand.Length;
             switch (mode)
             {
                 case Mode.Radius:
@@ -79,7 +79,7 @@ namespace FrequencyBand
         {
             for (int i = 0; i < SampleLength; i++)
             {
-                cubes[i].transform.localScale = new Vector3(rXScale, (AudioPeer.Instance.Samples[i] * sizePower) + minYScale, rZScale);
+                cubes[i].transform.localScale = new Vector3(rXScale, (AudioPeer.Instance.samples[i] * sizePower) + minYScale, rZScale);
             }
         }
 
@@ -87,7 +87,7 @@ namespace FrequencyBand
         {
             for(int i = 0; i < ParamLength ; i++)
             {
-                paramCubes[i].transform.localScale = new Vector3(pXScale, (AudioPeer.Instance.FreqBand[i] * pSizePower) + pMinYScale, pZScale);
+                paramCubes[i].transform.localScale = new Vector3(pXScale, (AudioPeer.Instance.freqBand[i] * pSizePower) + pMinYScale, pZScale);
             }
         }
 
