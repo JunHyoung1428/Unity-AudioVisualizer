@@ -35,8 +35,8 @@ namespace FrequencyBand
         [Range(8, 12)] public int pow = 9;
         [SerializeField]  int freqBandSize = 8;
         int FreqBandPower = 1;
-        [SerializeField] const float DecreaseRate = 0.005f;
-        [SerializeField] const float IncreaseRate = 1.2f;
+        [SerializeField]  float decreaseRate = 0.005f;
+        [SerializeField]  float IncreaseRate = 1.2f;
 
         [Space(3)]
         [Header("[OutPut]")]
@@ -111,7 +111,7 @@ namespace FrequencyBand
                 if (freqBand[i] > bandBuffer[i])
                 {
                     bandBuffer[i] = freqBand[i];
-                    bufferDecrease[i] = DecreaseRate;
+                    bufferDecrease[i] = decreaseRate;
                 }
 
                 if (freqBand[i] < bandBuffer[i])

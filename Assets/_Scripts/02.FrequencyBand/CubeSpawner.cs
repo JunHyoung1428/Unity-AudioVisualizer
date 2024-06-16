@@ -18,7 +18,9 @@ namespace FrequencyBand
             Linear =1,
         }
 
-        [SerializeField] Mode mode; 
+        [Header("[Mode Setting]")]
+        [SerializeField] Mode mode;
+        [SerializeField] bool usingBuffer;
 
         [Space(3)]
         [Header("[Radius Cubes Setting]")]
@@ -72,7 +74,12 @@ namespace FrequencyBand
                 UpdateRadius();
 
             if (spawndParam)
-                UpdateParams();
+            {
+                if(usingBuffer)
+                    UpdateParamBuffers();
+                else
+                    UpdateParams();
+            }
         }
 
         void UpdateRadius()
@@ -88,6 +95,14 @@ namespace FrequencyBand
             for(int i = 0; i < ParamLength ; i++)
             {
                 paramCubes[i].transform.localScale = new Vector3(pXScale, (AudioPeer.Instance.freqBand[i] * pSizePower) + pMinYScale, pZScale);
+            }
+        }
+
+        void UpdateParamBuffers()
+        {
+            for(int i =0; i < ParamLength ; i++)
+            {
+                paramCubes[i].transform.localScale = new Vector3(pXScale, (AudioPeer.Instance.bandBuffer[i] * pSizePower)+ minYScale, pZScale);
             }
         }
 
