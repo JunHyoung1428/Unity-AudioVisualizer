@@ -1,6 +1,6 @@
 ## 📝 Introduction
 
-- A project exploring various aspects using **GetSpectrumData** from **AudioSource**.
+- A project exploring various aspects using ``GetSpectrumData`` from ``AudioSource``
 
 <br/> <br/> 
 
@@ -20,14 +20,14 @@ In this Project 43 hertz per Sample
 
 | Audio Frequency Subset | Frequency Range (Hz) | Sample Count | Calculated Frequency Range (Hz) |
 |------------------------|----------------------|--------------|----------------------------------|
-| SubBass                | 16 - 60              | 2            | 0 - 86                           |
-| Bass                   | 60 - 250             | 4            | 87 - 258                         |
-| LowMidrange            | 250 - 500            | 8            | 259 - 602                        |
-| MidRange               | 500 - 2000           | 16           | 603 - 1290                       |
-| HighMidrange           | 2000 - 4000          | 32           | 1291 - 2666                      |
-| Presence               | 4000 - 6000          | 64           | 2667 - 5418                      |
-| Brilliance             | 6000 - 20000         | 128          | 5419 - 10922                     |
-| Highs                  | 20000 and above      | 256          | 10923 - 21930                    |
+| ``SubBass``                | 16 - 60              | 2            | 0 - 86                           |
+| ``Bass``                   | 60 - 250             | 4            | 87 - 258                         |
+| ``LowMidrange``           | 250 - 500            | 8            | 259 - 602                        |
+| ``MidRange``               | 500 - 2000           | 16           | 603 - 1290                       |
+| ``HighMidrange``           | 2000 - 4000          | 32           | 1291 - 2666                      |
+| ``Presence``               | 4000 - 6000          | 64           | 2667 - 5418                      |
+| ``Brilliance``             | 6000 - 20000         | 128          | 5419 - 10922                     |
+| ``Highs``                  | 20000 and above      | 256          | 10923 - 21930                    |
 
 ***
 - ### 03.AudioResponseUI
