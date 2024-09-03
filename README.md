@@ -31,7 +31,10 @@ In this Project 43 hertz per Sample
 
 ***
 - ### 03.AudioResponseUI
-![VisualizerUI](https://github.com/JunHyoung1428/Unity-AudioVisualizer/assets/154119773/d2a4fa67-37b1-4a6e-b05c-1de2ef7d7eb9)
+
+
+https://github.com/user-attachments/assets/298d2da8-d849-40c3-9f9b-54f26ed50ab1
+
 😎
 
 ***
